@@ -8,10 +8,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./servers.component.css']
 })
 export class ServersComponent implements OnInit {
+  allowNewServer = false;
+  serverCreationStatus = 'No server was created.';
+  serverName = 'TestServer';
+  serverCreated = false;
 
-  constructor() { }
+  username = '';
+
+  constructor() {
+    setTimeout(() => {
+      this.allowNewServer = true;
+    }, 2000); 
+   }
 
   ngOnInit() {
+  }
+
+  onCreateServer() {
+    this.serverCreated = true;
+    this.serverCreationStatus = 'Server was created! Name is ' + this.serverName;
+  }
+
+  onUpdateServerName(event: Event) {
+    //This could be why the code that I had made checking the value of something in the memory app had errored. Next time remember about casting the type
+    this.serverName = (<HTMLInputElement>event.target).value;
   }
 
 }
